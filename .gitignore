@@ -1,0 +1,17 @@
+# Ambiente
+.venv/
+__pycache__/
+.env
+.env.*
+
+# Credenciais locais
+**/credenciais-local.md
+
+# Dados gerados
+data/
+
+# IDE / SO
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

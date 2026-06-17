@@ -63,6 +63,34 @@ services:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
 
+  spark-master:
+    image: bitnami/spark:3.4.1
+    container_name: projeto-ed-spark-master
+    restart: unless-stopped
+    environment:
+      SPARK_MODE: master
+      SPARK_MASTER_HOST: spark-master
+      SPARK_MASTER_PORT: 7077
+      SPARK_MASTER_WEBUI_PORT: 8080
+    ports:
+      - "7077:7077"
+      - "8080:8080"
+
+  spark-worker:
+    image: bitnami/spark:3.4.1
+    container_name: projeto-ed-spark-worker
+    restart: unless-stopped
+    depends_on:
+      - spark-master
+    environment:
+      SPARK_MODE: worker
+      SPARK_MASTER_URL: spark://spark-master:7077
+      SPARK_WORKER_WEBUI_PORT: 8081
+      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_CORES: 1
+    ports:
+      - "8081:8081"
+
 volumes:
   postgres_data:
   minio_data:

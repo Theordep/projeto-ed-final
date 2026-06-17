@@ -1,0 +1,47 @@
+# Issue #3 — Docker + MinIO (object storage local)
+# https://github.com/Theordep/projeto-ed-final/issues/3
+
+services:
+  minio:
+    image: minio/minio:RELEASE.2025-02-03T21-03-04Z
+    container_name: projeto-ed-minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+    # Host 9090/9091 evita conflito com outro MinIO no Windows (9000/9001)
+    ports:
+      - "9090:9000"
+      - "9091:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  minio-init:
+    image: minio/mc
+    container_name: projeto-ed-minio-init
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: /bin/sh
+    command: >
+      -c "
+      mc alias set local http://minio:9000 $${MINIO_ROOT_USER:-minioadmin} $${MINIO_ROOT_PASSWORD:-minioadmin} &&
+      mc mb -p local/landing-zone 2>/dev/null || true &&
+      mc mb -p local/bronze 2>/dev/null || true &&
+      mc mb -p local/silver 2>/dev/null || true &&
+      mc mb -p local/gold 2>/dev/null || true &&
+      echo '--- Buckets medalhao ---' &&
+      mc ls local
+      "
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+
+volumes:
+  minio_data:

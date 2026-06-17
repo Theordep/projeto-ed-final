@@ -1,0 +1,20 @@
+[project]
+name = "sparkeats"
+version = "0.1.0"
+description = "SparkEats — pipeline analítico delivery (Trabalho Final Engenharia de Dados)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "faker>=24.0",
+    "psycopg2-binary>=2.9",
+    "sqlalchemy>=2.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.4",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"

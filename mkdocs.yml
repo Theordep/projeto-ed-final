@@ -1,0 +1,17 @@
+site_name: SparkEats
+site_url: https://theordep.github.io/projeto-ed-final
+repo_url: https://github.com/Theordep/projeto-ed-final
+repo_name: Theordep/projeto-ed-final
+
+theme:
+  name: material
+  language: pt
+  palette:
+    - scheme: default
+      primary: green
+      accent: light green
+
+nav:
+  - Home: index.md
+
+docs_dir: Docs

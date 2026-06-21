@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Executa o pipeline SparkEats (Landing → Bronze → Silver). Issue #16."""
+"""Executa o pipeline SparkEats (Landing → Bronze → Silver → Gold)."""
 
 from __future__ import annotations
 
@@ -10,11 +10,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-STEPS = ("landing", "bronze", "silver")
+STEPS = ("landing", "bronze", "silver", "gold")
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Pipeline SparkEats — Landing → Bronze → Silver")
+    parser = argparse.ArgumentParser(
+        description="Pipeline SparkEats — Landing → Bronze → Silver → Gold"
+    )
     parser.add_argument(
         "--step",
         choices=STEPS + ("all",),
@@ -24,7 +26,7 @@ def main() -> int:
     parser.add_argument(
         "--incremental",
         action="store_true",
-        help="Carga incremental na landing (tabelas fato)",
+        help="Carga incremental (landing: tabelas fato; gold: checkpoint fato_pedidos)",
     )
     args = parser.parse_args()
 
@@ -43,8 +45,12 @@ def main() -> int:
             from sparkeats.silver.silver import run as run_silver
 
             run_silver()
+        elif step == "gold":
+            from sparkeats.gold.gold import run as run_gold
 
-    print("\n=== Pipeline finalizado (Landing → Bronze → Silver) ===")
+            run_gold(incremental=args.incremental)
+
+    print("\n=== Pipeline finalizado (Landing → Bronze → Silver → Gold) ===")
     return 0
 
 

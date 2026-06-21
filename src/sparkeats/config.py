@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from datetime import date
 
 PROJECT_ROOT = os.getenv("PROJECT_ROOT", "/mnt/c/projeto-ed-final")
 
@@ -71,3 +72,31 @@ SPARK_PACKAGES = (
 )
 
 MINIO_CONTAINER = os.getenv("MINIO_CONTAINER", "projeto-ed-minio")
+
+CHECKPOINT_DEFAULT_DATE = date(2020, 1, 1)
+CHECKPOINT_DEFAULT_ID = 0
+
+MESES_PT = {
+    1: "janeiro",
+    2: "fevereiro",
+    3: "marco",
+    4: "abril",
+    5: "maio",
+    6: "junho",
+    7: "julho",
+    8: "agosto",
+    9: "setembro",
+    10: "outubro",
+    11: "novembro",
+    12: "dezembro",
+}
+
+DIAS_PT = {
+    0: "segunda-feira",
+    1: "terca-feira",
+    2: "quarta-feira",
+    3: "quinta-feira",
+    4: "sexta-feira",
+    5: "sabado",
+    6: "domingo",
+}

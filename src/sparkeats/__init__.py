@@ -1,1 +1,1 @@
-"""SparkEats — pipeline medalhão (Landing → Bronze → Silver)."""
+"""SparkEats — pipeline medalhão (Landing → Bronze → Silver → Gold)."""

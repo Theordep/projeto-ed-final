@@ -50,6 +50,13 @@ def landing_csv_glob(table: str) -> str:
     return f"{base.as_uri()}/*/*/*/*/*.csv"
 
 
+def gold_uri(name: str) -> str:
+    """Path Delta da camada Gold (modelo dimensional)."""
+    path = _local_dir("gold") / name
+    path.mkdir(parents=True, exist_ok=True)
+    return path.as_uri()
+
+
 def _sync_via_minio_client(local: Path, bucket: str) -> None:
     from minio import Minio
 

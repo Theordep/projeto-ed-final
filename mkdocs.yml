@@ -1,17 +1,121 @@
 site_name: SparkEats
+site_description: Pipeline analítico de delivery com Apache Spark, MinIO e arquitetura Medallion
 site_url: https://theordep.github.io/projeto-ed-final
 repo_url: https://github.com/Theordep/projeto-ed-final
 repo_name: Theordep/projeto-ed-final
 
+docs_dir: Docs
+
 theme:
   name: material
   language: pt
+  logo: assets/logo.png
+  favicon: assets/logo.png
+
   palette:
-    - scheme: default
-      primary: green
-      accent: light green
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: purple
+      toggle:
+        icon: material/weather-night
+        name: Modo escuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: purple
+      toggle:
+        icon: material/weather-sunny
+        name: Modo claro
+
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.tracking
+    - navigation.path
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.tooltips
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.mark
+  - pymdownx.caret
+  - pymdownx.tilde
+  - pymdownx.keys
+  - pymdownx.snippets
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - toc:
+      permalink: true
+
+plugins:
+  - search:
+      lang: pt
+
+extra_css:
+  - assets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Theordep/projeto-ed-final
+      name: Repositório no GitHub
 
 nav:
   - Home: index.md
 
-docs_dir: Docs
+  - Início Rápido:
+    - Pré-requisitos: quickstart/prerequisitos.md
+    - Instalação: quickstart/instalacao.md
+
+  - Infraestrutura:
+    - Visão geral: infra/index.md
+    - Docker: infra/docker.md
+    - PostgreSQL: infra/postgres.md
+    - MinIO: infra/minio.md
+    - Apache Spark: infra/spark.md
+    - Apache Airflow: infra/airflow.md
+
+  - Pipeline:
+    - Visão geral: pipeline/index.md
+    - Geração de dados: pipeline/faker.md
+    - Landing Zone: pipeline/landing.md
+    - Bronze: pipeline/bronze.md
+    - Silver: pipeline/silver.md
+    - Gold: pipeline/gold.md
+
+  - Modelo de Dados:
+    - Origem (OLTP): modelo/origem.md
+    - Dimensional (Gold): modelo/dimensional.md
+
+  - Dashboard:
+    - KPIs e métricas: dashboard/index.md
+
+  - Desenvolvimento:
+    - Convenções: dev/convencoes.md
+    - Fluxo de PR: dev/pull-request.md

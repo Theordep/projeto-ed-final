@@ -7,7 +7,9 @@ requires-python = ">=3.12"
 dependencies = [
     "faker>=24.0",
     "mkdocs-material>=9.7.6",
+    "mkdocs-minify-plugin>=0.8.0",
     "psycopg2-binary>=2.9",
+    "pymdown-extensions>=10.21.3",
     "sqlalchemy>=2.0",
 ]
 

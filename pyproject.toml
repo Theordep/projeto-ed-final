@@ -5,11 +5,16 @@ description = "SparkEats — pipeline analítico delivery (Trabalho Final Engenh
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "delta-spark==3.2.0",
     "faker>=24.0",
+    "minio>=7.2",
     "mkdocs-material>=9.7.6",
     "mkdocs-minify-plugin>=0.8.0",
+    "pandas>=2.0",
     "psycopg2-binary>=2.9",
     "pymdown-extensions>=10.21.3",
+    "pyspark==3.5.1",
+    "setuptools>=69.0",
     "sqlalchemy>=2.0",
 ]
 
@@ -21,3 +26,6 @@ dev = [
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]

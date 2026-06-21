@@ -91,6 +91,40 @@ services:
     ports:
       - "8081:8081"
 
+  airflow:
+    build:
+      context: ..
+      dockerfile: docker/airflow/Dockerfile
+    container_name: projeto-ed-airflow
+    restart: unless-stopped
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__DAGS_FOLDER: /opt/airflow/project/dags
+      AIRFLOW__CORE__ENABLE_XCOM_PICKLING: 'True'
+      PYTHONPATH: /opt/airflow/project/src
+      PROJECT_ROOT: /opt/airflow/project
+      DATA_ROOT: /opt/airflow/project/data
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-sparkeats}
+      POSTGRES_USER: ${POSTGRES_USER:-sparkeats}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sparkeats_dev}
+      SPARK_MASTER: spark://spark-master:7077
+    ports:
+      - "8082:8080"
+    volumes:
+      - ..:/opt/airflow/project
+    command: standalone
+    depends_on:
+      - postgres
+      - minio
+      - spark-master
+      - spark-worker
+
 volumes:
   postgres_data:
   minio_data:

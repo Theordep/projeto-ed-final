@@ -65,9 +65,13 @@ cd projeto-ed-final
 docker compose -f docker/docker-compose.yml up -d
 ```
 
+> Este comando sobe o PostgreSQL, o MinIO, o Spark e o Airflow.
+>
 > Console MinIO: **http://localhost:9091** — usuário: `minioadmin` / senha: `minioadmin`
 >
 > Spark Master UI: **http://localhost:8080**
+>
+> Airflow UI: **http://localhost:8082** — usuário: `admin` / senha: `admin`
 >
 > PostgreSQL: `localhost:5433` | MinIO API: `localhost:9090`
 
@@ -88,6 +92,18 @@ uv run psql -h localhost -p 5433 -U sparkeats -d sparkeats -f sql/ddl_origem_pos
 ```bash
 uv run python scripts/seed_database.py
 ```
+
+### 6. Executar DAGs no Airflow
+
+Acesse o Airflow em **http://localhost:8082** (admin / admin).
+
+Ative a DAG `dag_pipeline_completo` que roda automaticamente todo dia às 00:00 e executa em sequência:
+
+```
+landing → bronze → silver → gold
+```
+
+Cada etapa espera a anterior terminar.
 
 ## Documentação (MkDocs)
 

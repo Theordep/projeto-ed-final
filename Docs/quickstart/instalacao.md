@@ -31,6 +31,14 @@ docker ps
     | Airflow UI | http://localhost:8082 | `admin` / `admin` |
     | PostgreSQL | `localhost:5433` | `sparkeats` / `sparkeats_dev` |
 
+!!! note "Airflow"
+    O comando acima já inicia o serviço `airflow` junto com os demais.
+    Se quiser iniciar apenas o Airflow depois, use:
+
+    ```bash
+    docker compose -f docker/docker-compose.yml up -d airflow
+    ```
+
 ## 3. Instalar dependências Python
 
 ```bash
@@ -50,10 +58,32 @@ uv run psql -h localhost -p 5433 -U sparkeats -d sparkeats \
 uv run python scripts/seed_database.py
 ```
 
-!!! tip "Quanto tempo leva?"
-    O seed gera ~10.000 registros por tabela principal com distribuição dos últimos 3 anos. Espere entre 2 e 5 minutos dependendo da sua máquina.
+## 6. Executar as DAGs no Airflow
 
-## 6. Verificar o ambiente
+Acesse o Airflow em **http://localhost:8082** (usuário: `admin` / senha: `admin`).
+
+### Opção 1: Pipeline Automático (Recomendado)
+
+Ative a DAG `dag_pipeline_completo`:
+
+1. Procure por `dag_pipeline_completo` na lista de DAGs
+2. Clique no toggle para ativar
+3. A DAG roda automaticamente todo dia às **00:00 (meia-noite)**
+4. Executa em sequência: landing → bronze → silver → gold
+5. Cada etapa começa automaticamente quando a anterior termina
+
+### Opção 2: Executar DAGs Individuais Manualmente
+
+Se quiser disparar camadas específicas sem esperar pela próxima meia-noite:
+
+1. `dag_landing` — extrai dados do PostgreSQL
+2. `dag_bronze` — converte para Delta Lake
+3. `dag_silver` — limpa e normaliza
+4. `dag_gold` — cria modelo dimensional
+
+**Importante:** Sempre respeite a ordem (landing → bronze → silver → gold).
+
+## 7. Verificar o ambiente
 
 === "PostgreSQL"
     ```bash

@@ -54,6 +54,12 @@ def _gold_full(**ctx) -> None:
     run(incremental=False)
 
 
+def _export_to_pg(**ctx) -> None:
+    """Espelha tabelas Gold no schema analytics do PostgreSQL para o Metabase."""
+    from sparkeats.gold.export_to_pg import run
+    run()
+
+
 # ---------------------------------------------------------------------------
 # Definição do DAG
 # ---------------------------------------------------------------------------
@@ -105,5 +111,11 @@ with DAG(
         ),
     )
 
+    export = PythonOperator(
+        task_id="export_to_pg",
+        python_callable=_export_to_pg,
+        doc_md="Gold → PostgreSQL schema analytics (consumo pelo Metabase dashboard).",
+    )
+
     # Dependências: pipeline sequencial
-    landing >> bronze >> silver >> gold
+    landing >> bronze >> silver >> gold >> export

@@ -12,9 +12,7 @@ Pipeline de dados analítico para uma plataforma de delivery, desenvolvido na di
 
 ## Desenho de Arquitetura
 
-Coloque uma imagem do seu projeto, como no exemplo abaixo:
-
-![Arquitetura](Docs/arquitetura.png)
+![Arquitetura](Docs/assets/arquitetura.png)
 
 ## Pré-requisitos e ferramentas utilizadas
 

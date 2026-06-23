@@ -57,6 +57,12 @@ def _gold_incremental(**ctx) -> None:
     run(incremental=True)
 
 
+def _export_to_pg(**ctx) -> None:
+    """Espelha tabelas Gold no schema analytics do PostgreSQL para o Metabase."""
+    from sparkeats.gold.export_to_pg import run
+    run()
+
+
 # ---------------------------------------------------------------------------
 # Definição do DAG
 # ---------------------------------------------------------------------------
@@ -105,4 +111,10 @@ with DAG(
         doc_md="Append incremental em fato_pedidos usando checkpoint de ID/data.",
     )
 
-    landing >> bronze >> silver >> gold
+    export = PythonOperator(
+        task_id="export_to_pg",
+        python_callable=_export_to_pg,
+        doc_md="Gold → PostgreSQL schema analytics (consumo pelo Metabase dashboard).",
+    )
+
+    landing >> bronze >> silver >> gold >> export

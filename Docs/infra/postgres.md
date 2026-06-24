@@ -1,10 +1,8 @@
 # Guia — PostgreSQL SparkEats (banco origem)
 
-O **PostgreSQL** simula o banco transacional (OLTP) do app **SparkEats** — de onde o pipeline vai extrair dados para o Data Lake.
+O **PostgreSQL** simula o banco transacional (OLTP) do app **SparkEats** — de onde o pipeline extrai dados para o Data Lake.
 
 Issue: [#7](https://github.com/Theordep/projeto-ed-final/issues/7)
-
-Documentação técnica: [Docs/infra/postgres.md](../infra/postgres.md)
 
 ---
 
@@ -89,7 +87,7 @@ DDL completo: `sql/ddl_origem_postgresql.sql`
 
 ## Popular com dados (seed Faker)
 
-Pré-requisito: [UV instalado](./uv.md).
+Pré-requisito: [uv instalado](../quickstart/prerequisitos.md).
 
 ```bash
 cd /mnt/c/projeto-ed-final
@@ -187,7 +185,7 @@ Em **todas** as tabelas:
 
 - `created_at`, `updated_at`
 
-O pipeline futuro usa `updated_at` para saber o que extrair desde o último checkpoint.
+O pipeline incremental na landing filtra tabelas fato por **PK** (`id_pedido`, etc.) usando checkpoint em arquivo. O campo `updated_at` existe nas tabelas e é usado pelo seed para simular alterações (SCD2 na Gold).
 
 ### Pedidos (fato central)
 
@@ -280,6 +278,6 @@ Pare o stack concorrente antes de subir o `projeto-ed-final`.
 
 ## Ver também
 
-- [Guia UV](./uv.md) — rodar o `seed_database.py`
+- [Pré-requisitos](../quickstart/prerequisitos.md) — uv e ferramentas
 - [Guia Docker](./docker.md) — compose e volumes
 - [Guia MinIO](./minio.md) — destino dos dados após extração

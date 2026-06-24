@@ -25,7 +25,7 @@ Seguimos o padrão [Conventional Commits](https://www.conventionalcommits.org/en
 feat(pipeline): adiciona DAG da camada silver
 fix(seed): corrige distribuição de datas no seed_database
 docs(mkdocs): atualiza página do modelo dimensional
-chore(deps): atualiza pyspark para 3.4.2
+chore(deps): atualiza pyspark para 3.5.1
 ```
 
 ## Branches

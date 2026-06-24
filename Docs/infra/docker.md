@@ -1,10 +1,10 @@
 # Guia — Docker no WSL (projeto-ed-final)
 
-O **Docker** roda os serviços de infraestrutura do **SparkEats** em containers isolados: PostgreSQL, MinIO e (no futuro) Airflow, Metabase, etc.
+O **Docker** roda os serviços de infraestrutura do **SparkEats** em containers isolados: PostgreSQL, MinIO, Apache Spark, Apache Airflow e Metabase.
 
 Neste projeto usamos **Docker Engine no WSL2** — **sem** Docker Desktop.
 
-Documentação técnica resumida: [Docs/infra/](../infra/)
+Documentação técnica resumida: [Visão geral da infra](index.md)
 
 ---
 
@@ -13,9 +13,12 @@ Documentação técnica resumida: [Docs/infra/](../infra/)
 ```text
 docker/docker-compose.yml
         │
-        ├── postgres  →  banco origem SparkEats (porta 5433)
-        └── minio     →  Data Lake local / API S3 (portas 9090/9091)
-              └── minio-init  →  cria buckets medalhão na subida
+        ├── postgres              →  banco origem + metadados Airflow (porta 5433)
+        ├── minio                 →  Data Lake / API S3 (portas 9090/9091)
+        │     └── minio-init      →  cria buckets medalhão na subida
+        ├── spark-master/worker   →  cluster Spark standalone (8080/8081)
+        ├── airflow-*             →  orquestrador do pipeline (porta 8082)
+        └── metabase              →  dashboard BI (porta 3000)
 ```
 
 | Container | Função no pipeline |
@@ -23,6 +26,9 @@ docker/docker-compose.yml
 | `projeto-ed-postgres` | Dados OLTP (origem) — issue #7 |
 | `projeto-ed-minio` | Object storage — camadas landing/bronze/silver/gold — issue #3 |
 | `projeto-ed-minio-init` | Job único: cria buckets e encerra |
+| `projeto-ed-spark-master` | Cluster Spark standalone (monitoramento) |
+| `projeto-ed-airflow-webserver` | Interface e execução das DAGs |
+| `projeto-ed-metabase` | Dashboard BI (schema `analytics`) |
 
 ---
 
@@ -164,7 +170,7 @@ Conceitos importantes:
 
 | Conceito | No nosso projeto |
 |----------|------------------|
-| **service** | `postgres`, `minio`, `minio-init` |
+| **service** | `postgres`, `minio`, `minio-init`, `spark-master`, `spark-worker`, `airflow-webserver`, `airflow-scheduler`, `metabase` |
 | **image** | Imagem Docker Hub (`postgres:16-alpine`, `minio/minio:...`) |
 | **ports** | `HOST:CONTAINER` — ex.: `5433:5432` |
 | **volumes** | `postgres_data`, `minio_data` — persistem dados entre `down`/`up` |
@@ -259,9 +265,9 @@ uv run python scripts/seed_database.py
 |-------|----------------|
 | #3 MinIO | `minio` + `minio-init` |
 | #7 Postgres | `postgres` |
-| #6 Spark | processamento (futuro) |
-| #16 Pipeline | extração → buckets |
-| Airflow / Metabase | serviços futuros no compose |
+| #6 Spark | `spark-master` + `spark-worker` (cluster); PySpark `local[*]` no Airflow |
+| #16 Pipeline | DAGs Airflow → camadas medalhão |
+| Dashboard | `metabase` (consome schema `analytics`) |
 
 ---
 
@@ -282,4 +288,4 @@ uv run python scripts/seed_database.py
 ## Próximo passo
 
 - [Guia MinIO](./minio.md) — buckets e console web
-- [Guia PostgreSQL](./postgres.md) — banco, seed e DBeaver
+- [PostgreSQL](postgres.md) — banco, seed e DBeaver

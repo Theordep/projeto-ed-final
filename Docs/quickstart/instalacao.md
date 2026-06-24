@@ -29,6 +29,7 @@ docker ps
     | Spark Master UI | http://localhost:8080 | — |
     | Spark Worker UI | http://localhost:8081 | — |
     | Airflow UI | http://localhost:8082 | `admin` / `admin` |
+    | Metabase | http://localhost:3000 | Configurar no primeiro acesso |
     | PostgreSQL | `localhost:5433` | `sparkeats` / `sparkeats_dev` |
 
 ## 3. Instalar dependências Python
@@ -51,7 +52,7 @@ uv run python scripts/seed_database.py
 ```
 
 !!! tip "Quanto tempo leva?"
-    O seed gera ~10.000 registros por tabela principal com distribuição dos últimos 3 anos. Espere entre 2 e 5 minutos dependendo da sua máquina.
+    O seed gera **50.000 pedidos** e tabelas derivadas (itens, pagamentos, avaliações). Espere entre 5 e 6 minutos dependendo da sua máquina.
 
 ## 6. Verificar o ambiente
 

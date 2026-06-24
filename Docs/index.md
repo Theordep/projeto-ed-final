@@ -70,7 +70,7 @@ O pipeline segue a **Arquitetura Medallion** em quatro camadas, orquestradas pel
 
 ## Modelo de Dados (Origem)
 
-O banco PostgreSQL possui **10 tabelas** organizadas em duas categorias:
+O banco PostgreSQL possui **12 tabelas** organizadas em três categorias:
 
 === "Dimensões de apoio"
     - `categorias_restaurante`

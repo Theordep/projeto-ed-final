@@ -5,9 +5,8 @@ O **SparkEats** é um projeto acadêmico que simula o pipeline de dados analíti
 !!! info "Disciplina"
     Projeto final da disciplina de **Engenharia de Dados** — curso de Engenharia de Software da **UNISATC**.
 
----
 
-## Modelo de Operação
+## Arquitetura de dados
 
 O pipeline segue a **Arquitetura Medallion** em quatro camadas, orquestradas pelo Apache Airflow e armazenadas no MinIO:
 
@@ -25,7 +24,7 @@ O pipeline segue a **Arquitetura Medallion** em quatro camadas, orquestradas pel
 === "Gold"
     Dados no **modelo dimensional** (fatos e dimensões) prontos para consumo pelo dashboard. Contém os KPIs e métricas do negócio.
 
----
+
 
 ## Stack Tecnológica
 
@@ -41,7 +40,6 @@ O pipeline segue a **Arquitetura Medallion** em quatro camadas, orquestradas pel
 | Ambiente | Docker + Docker Compose | Containerização de todos os serviços |
 | Linguagem | Python 3.12 + uv | Scripts, DAGs e dependências |
 
----
 
 ## Fluxo do Dado
 
@@ -58,7 +56,6 @@ O pipeline segue a **Arquitetura Medallion** em quatro camadas, orquestradas pel
     | `sparkeats_pipeline_full` | Semanal | Carga completa — reprocessa todos os dados |
     | `sparkeats_pipeline_incremental` | Diária | Carga incremental — processa apenas registros novos/alterados |
 
----
 
 ## Modelo de Dados (Origem)
 
@@ -82,7 +79,6 @@ O banco PostgreSQL possui **12 tabelas** organizadas em três categorias:
     - `pagamentos`
     - `avaliacoes`
 
----
 
 ## Serviços e Portas
 
@@ -99,7 +95,6 @@ O banco PostgreSQL possui **12 tabelas** organizadas em três categorias:
 !!! warning "Portas deslocadas"
     As portas padrão foram alteradas para evitar conflito com outros serviços no Windows/WSL. Consulte o `docker/docker-compose.yml` para detalhes.
 
----
 
 ## Equipe
 
@@ -111,7 +106,6 @@ O banco PostgreSQL possui **12 tabelas** organizadas em três categorias:
 | Bettina da Silva | [@Berbett](https://github.com/Berbett) |
 | Carlos Eduardo | [@carloseduardob](https://github.com/carloseduardob) |
 
----
 
 ## Referências
 

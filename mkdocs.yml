@@ -1,5 +1,5 @@
 site_name: SparkEats
-site_description: Pipeline analítico de delivery com Apache Spark, MinIO e arquitetura Medallion
+site_description: Pipeline analítico de delivery com Apache Spark 3.5.1, MinIO, arquitetura Medallion e Metabase
 site_url: https://theordep.github.io/projeto-ed-final
 repo_url: https://github.com/Theordep/projeto-ed-final
 repo_name: Theordep/projeto-ed-final

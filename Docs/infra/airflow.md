@@ -16,33 +16,39 @@ docker compose -f docker/docker-compose.yml up -d airflow
 
 ## DAGs do pipeline
 
-Cada camada da arquitetura Medallion possui uma DAG dedicada:
+O SparkEats usa **duas DAGs** que executam todo o pipeline de ponta a ponta em cada execução:
 
-| DAG | Responsabilidade |
-|-----|-----------------|
-| `dag_landing` | Extrai tabelas do PostgreSQL e grava CSVs no MinIO (`landing-zone`) |
-| `dag_bronze` | Converte CSVs da landing para Delta Lake no bucket `bronze` |
-| `dag_silver` | Limpa e normaliza os dados do bronze para o bucket `silver` |
-| `dag_gold` | Constrói o modelo dimensional no bucket `gold` |
+| DAG | Frequência | Descrição |
+|-----|-----------|-----------|
+| `sparkeats_pipeline_full` | Semanal | Carga completa — reprocessa todos os dados do zero |
+| `sparkeats_pipeline_incremental` | Diária | Carga incremental — processa apenas registros novos ou alterados |
 
-## Ordem de execução
+## Cadeia interna de cada DAG
+
+Ambas as DAGs percorrem a mesma sequência de tarefas:
 
 ```
-dag_landing → dag_bronze → dag_silver → dag_gold
+landing → bronze → silver → gold → export_to_pg
 ```
 
-!!! warning "Execute na ordem"
-    Cada DAG depende da camada anterior. Executar `dag_silver` sem `dag_bronze` completo causará falha.
+| Tarefa | Responsabilidade |
+|--------|-----------------|
+| `landing` | Extrai tabelas do PostgreSQL e grava CSVs no MinIO (`landing-zone`) |
+| `bronze` | Converte CSVs para Delta Lake no bucket `bronze` |
+| `silver` | Limpa, tipifica e normaliza os dados para o bucket `silver` |
+| `gold` | Constrói o modelo dimensional no bucket `gold` |
+| `export_to_pg` | Exporta as tabelas Gold para o schema `analytics` no PostgreSQL (consumido pelo Metabase) |
+
+!!! warning "Dependência de ordem"
+    Cada tarefa depende da anterior. A DAG garante a ordem de execução automaticamente.
 
 ## Estrutura das DAGs
 
 ```
 projeto-ed-final/
 └── dags/
-    ├── dag_landing.py
-    ├── dag_bronze.py
-    ├── dag_silver.py
-    └── dag_gold.py
+    ├── sparkeats_pipeline_full.py
+    └── sparkeats_pipeline_incremental.py
 ```
 
 ## Verificar logs

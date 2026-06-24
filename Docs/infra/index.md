@@ -9,9 +9,10 @@ O SparkEats roda inteiramente em containers Docker. Todos os serviços são decl
 | `postgres` | `postgres:16-alpine` | Banco de dados OLTP (origem) |
 | `minio` | `minio/minio` | Object storage (Data Lake) |
 | `minio-init` | `minio/mc` | Cria os buckets automaticamente |
-| `spark-master` | `bitnami/spark:3.4.1` | Coordenador do cluster Spark |
-| `spark-worker` | `bitnami/spark:3.4.1` | Executor do cluster Spark |
+| `spark-master` | `bitnami/spark:3.5.1` | Coordenador do cluster Spark |
+| `spark-worker` | `bitnami/spark:3.5.1` | Executor do cluster Spark |
 | `airflow` | `apache/airflow` | Orquestrador do pipeline |
+| `metabase` | `metabase/metabase` | Dashboard analítico (porta 3000) |
 
 ## Arquitetura de rede
 

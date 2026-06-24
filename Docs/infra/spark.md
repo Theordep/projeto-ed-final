@@ -1,5 +1,9 @@
 # Apache Spark no Docker
 
+## Versão
+
+Apache Spark **3.5.1** — imagem `bitnami/spark:3.5.1`.
+
 ## Status
 
 - Cluster Apache Spark configurado em `docker/docker-compose.yml`
@@ -10,8 +14,7 @@
 ## Como iniciar
 
 ```bash
-cd c:\Users\gabri\Documents\GitHub\projeto-ed-final
-docker compose -f docker/docker-compose.yml up -d
+docker compose -f docker/docker-compose.yml up -d spark-master spark-worker
 ```
 
 ## Verificar serviços
@@ -28,5 +31,11 @@ docker compose -f docker/docker-compose.yml ps
 
 ## Observações
 
-- O compose atual já inclui MinIO e o cluster Spark standalone.
-- Ainda não há notebooks ou jobs DataBricks definidos no repositório.
+- O compose atual inclui MinIO e o cluster Spark standalone.
+- Os jobs Spark são submetidos pelas DAGs do Airflow via `spark-submit`.
+- Dependências Delta Lake e conectores S3/MinIO são carregados automaticamente via JARs configurados no `docker-compose.yml`.
+
+## Referências
+
+- [Apache Spark 3.5.1 Documentation](https://spark.apache.org/docs/3.5.1/)
+- [Delta Lake + Spark](https://delta.io/learn/getting-started/)

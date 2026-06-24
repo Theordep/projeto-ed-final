@@ -4,7 +4,7 @@ O banco de dados de origem é um PostgreSQL 16 que simula o sistema transacional
 
 ## Diagrama
 
-> Insira aqui o diagrama do modelo relacional (use [dbdiagram.io](https://dbdiagram.io) ou [sqldbm.com](https://sqldbm.com)).
+![Modelo de Origem SparkEats](../assets/modelo-dimensional.png)
 
 ## Tabelas
 

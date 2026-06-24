@@ -2,86 +2,86 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/dashboard/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/dev/convencoes/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/dev/pull-request/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/infra/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/infra/airflow/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/infra/docker/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/infra/minio/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/infra/postgres/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/infra/spark/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/modelo/dimensional/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/modelo/origem/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/pipeline/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/pipeline/bronze/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/pipeline/faker/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/pipeline/gold/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/pipeline/landing/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/pipeline/silver/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/quickstart/faker/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/quickstart/instalacao/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
     <url>
          <loc>https://theordep.github.io/projeto-ed-final/quickstart/prerequisitos/</loc>
-         <lastmod>2026-06-20</lastmod>
+         <lastmod>2026-06-24</lastmod>
     </url>
 </urlset>

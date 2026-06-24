@@ -12,18 +12,22 @@ theme:
   logo: assets/logo.png
   favicon: assets/logo.png
 
+  font:
+    text: Instrument Sans
+    code: JetBrains Mono
+
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: deep purple
-      accent: purple
+      primary: white
+      accent: red
       toggle:
         icon: material/weather-night
         name: Modo escuro
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: deep purple
-      accent: purple
+      primary: black
+      accent: red
       toggle:
         icon: material/weather-sunny
         name: Modo claro

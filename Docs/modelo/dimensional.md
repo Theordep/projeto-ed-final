@@ -4,7 +4,7 @@ O modelo dimensional da camada Gold segue o padrão **Star Schema**, com uma tab
 
 ## Diagrama
 
-> Insira aqui o diagrama do modelo dimensional (use [dbdiagram.io](https://dbdiagram.io)).
+![Modelo Dimensional SparkEats](../assets/modelo-dimensional.png)
 
 ## Tabela Fato
 

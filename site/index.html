@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Pipeline analítico de delivery com Apache Spark, MinIO e arquitetura Medallion">
+        <meta name="description" content="Pipeline analítico de delivery com Apache Spark 3.5.1, MinIO, arquitetura Medallion e Metabase">
       
       
       
@@ -46,8 +46,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Instrument+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Instrument Sans";--md-code-font:"JetBrains Mono"}</style>
       
     
     
@@ -69,7 +69,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="purple">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="red">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -126,7 +126,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="purple"  aria-label="Modo escuro"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="red"  aria-label="Modo escuro"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Modo escuro" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
@@ -136,7 +136,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="purple"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="red"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
@@ -547,6 +547,17 @@
     <span class="md-ellipsis">
       
         Equipe
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
       
     </span>
   </a>
@@ -1562,6 +1573,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1594,6 +1616,7 @@
 <blockquote>
 <p>Pipeline analítico de dados para uma plataforma de delivery — da origem ao dashboard.</p>
 </blockquote>
+<p><img alt="Arquitetura SparkEats" src="assets/arquitetura.png" /></p>
 <hr />
 <h2 id="o-que-e-o-sparkeats">O que é o SparkEats?<a class="headerlink" href="#o-que-e-o-sparkeats" title="Permanent link">&para;</a></h2>
 <p>O <strong>SparkEats</strong> é um projeto acadêmico que simula o pipeline de dados analítico de uma plataforma de delivery (no estilo iFood/Uber Eats). O objetivo é construir toda a jornada do dado: desde a geração sintética no banco de origem até a disponibilização em um modelo dimensional para consumo em dashboard.</p>
@@ -1604,31 +1627,7 @@
 <hr />
 <h2 id="modelo-de-operacao">Modelo de Operação<a class="headerlink" href="#modelo-de-operacao" title="Permanent link">&para;</a></h2>
 <p>O pipeline segue a <strong>Arquitetura Medallion</strong> em quatro camadas, orquestradas pelo Apache Airflow e armazenadas no MinIO:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>PostgreSQL (OLTP)
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>      │
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>      ▼
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>┌─────────────┐
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│ Landing Zone│  ← Extração bruta (CSV)
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>└──────┬──────┘
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>       │
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>       ▼
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>┌─────────────┐
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│   Bronze    │  ← Dados brutos em Delta Lake
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>└──────┬──────┘
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>       │
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>       ▼
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>┌─────────────┐
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>│   Silver    │  ← Dados limpos e normalizados
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>└──────┬──────┘
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>       │
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>       ▼
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>┌─────────────┐
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>│    Gold     │  ← Modelo dimensional (fatos e dimensões)
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>└──────┬──────┘
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>       │
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>       ▼
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>   Dashboard
-</span></code></pre></div>
+<p><img alt="Arquitetura do Pipeline SparkEats" src="assets/arquitetura.png" /></p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Landing Zone</label><label for="__tabbed_1_2">Bronze</label><label for="__tabbed_1_3">Silver</label><label for="__tabbed_1_4">Gold</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -1673,7 +1672,7 @@
 </tr>
 <tr>
 <td>Processamento</td>
-<td>Apache Spark 3.4.1</td>
+<td>Apache Spark 3.5.1</td>
 <td>Transformação entre camadas</td>
 </tr>
 <tr>
@@ -1685,6 +1684,11 @@
 <td>Formato</td>
 <td>Delta Lake</td>
 <td>Armazenamento transacional nas camadas Bronze→Gold</td>
+</tr>
+<tr>
+<td>Visualização</td>
+<td>Metabase</td>
+<td>Dashboard analítico conectado ao schema <code>analytics</code></td>
 </tr>
 <tr>
 <td>Ambiente</td>
@@ -1704,12 +1708,31 @@
 <p class="admonition-title">Jornada completa</p>
 <ol>
 <li><strong>Geração</strong> — <code>seed_database.py</code> popula o PostgreSQL com dados sintéticos de restaurantes, clientes, entregadores, pedidos, pagamentos e avaliações (últimos 3 anos).</li>
-<li><strong>Extração</strong> — DAG do Airflow lê as tabelas do PostgreSQL e grava CSVs no bucket <code>landing-zone</code> do MinIO.</li>
-<li><strong>Bronze</strong> — DAG converte os CSVs para Delta Lake no bucket <code>bronze</code>, preservando a estrutura original.</li>
-<li><strong>Silver</strong> — DAG aplica limpeza, tipagem e normalização, gravando no bucket <code>silver</code>.</li>
-<li><strong>Gold</strong> — DAG constrói o modelo dimensional no bucket <code>gold</code> com fatos e dimensões.</li>
-<li><strong>Dashboard</strong> — Ferramenta consome a camada Gold e exibe os KPIs.</li>
+<li><strong>Extração → Gold</strong> — A DAG do Airflow executa todas as camadas em sequência: Landing Zone (CSV) → Bronze (Delta Lake) → Silver (limpeza) → Gold (modelo dimensional) → <code>export_to_pg</code> (exporta para o schema <code>analytics</code>).</li>
+<li><strong>Dashboard</strong> — Metabase lê diretamente do schema <code>analytics</code> no PostgreSQL e exibe os KPIs.</li>
 </ol>
+<p>O pipeline é orquestrado por <strong>duas DAGs</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>DAG</th>
+<th>Frequência</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sparkeats_pipeline_full</code></td>
+<td>Semanal</td>
+<td>Carga completa — reprocessa todos os dados</td>
+</tr>
+<tr>
+<td><code>sparkeats_pipeline_incremental</code></td>
+<td>Diária</td>
+<td>Carga incremental — processa apenas registros novos/alterados</td>
+</tr>
+</tbody>
+</table>
 </div>
 <hr />
 <h2 id="modelo-de-dados-origem">Modelo de Dados (Origem)<a class="headerlink" href="#modelo-de-dados-origem" title="Permanent link">&para;</a></h2>
@@ -1779,6 +1802,11 @@
 <td><code>admin</code> / <code>admin</code></td>
 </tr>
 <tr>
+<td>Metabase</td>
+<td>http://localhost:3000</td>
+<td>Configurar no primeiro acesso</td>
+</tr>
+<tr>
 <td>PostgreSQL</td>
 <td><code>localhost:5433</code></td>
 <td><code>sparkeats</code> / <code>sparkeats_dev</code></td>
@@ -1821,6 +1849,17 @@
 </tr>
 </tbody>
 </table>
+<hr />
+<h2 id="referencias">Referências<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Apache Spark 3.5.1</strong> — <a href="https://spark.apache.org/docs/3.5.1/">spark.apache.org/docs/3.5.1</a></li>
+<li><strong>Apache Airflow</strong> — <a href="https://airflow.apache.org/docs/">airflow.apache.org/docs</a></li>
+<li><strong>Delta Lake</strong> — <a href="https://delta.io/">delta.io</a></li>
+<li><strong>MinIO</strong> — <a href="https://min.io/docs/minio/container/index.html">min.io/docs</a></li>
+<li><strong>Metabase</strong> — <a href="https://www.metabase.com/docs/latest/">metabase.com/docs</a></li>
+<li><strong>Python Faker</strong> — <a href="https://faker.readthedocs.io/en/master/">faker.readthedocs.io</a></li>
+<li><strong>MkDocs Material</strong> — <a href="https://squidfunk.github.io/mkdocs-material/">squidfunk.github.io/mkdocs-material</a></li>
+</ul>
 
 
 

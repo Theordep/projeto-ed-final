@@ -13,27 +13,7 @@ Pipeline de dados analítico para uma plataforma de delivery, desenvolvido na di
 
 ## Desenho de Arquitetura
 
-```
-PostgreSQL (OLTP)
-      │
-      ▼  Apache Airflow (orquestração)
-  Landing Zone (CSV)
-      │
-      ▼  PySpark
-  Bronze (Delta Lake)
-      │
-      ▼  PySpark
-  Silver (Delta Lake — qualidade + LGPD)
-      │
-      ▼  PySpark + SCD2
-  Gold (Delta Lake — modelo dimensional Kimball)
-      │
-      ▼  export_to_pg
-  PostgreSQL · schema analytics
-      │
-      ▼
-  Metabase (Dashboard)
-```
+![Arquitetura SparkEats](Docs/assets/arquitetura.png)
 
 > Object Storage: **MinIO** (S3-compatível) — buckets `landing-zone`, `bronze`, `silver`, `gold`
 

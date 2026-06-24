@@ -63,6 +63,8 @@ Após o primeiro acesso, conecte ao banco de análise:
 
 **Metabase** — executado em Docker na porta `3000`.
 
+![Dashboard Metabase](../assets/dashboard-metabase.png)
+
 !!! info "Fonte dos dados"
     O Metabase lê do schema `analytics` no PostgreSQL, populado automaticamente
     pela tarefa `export_to_pg` no final de cada DAG (full e incremental).

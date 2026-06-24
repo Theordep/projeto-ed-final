@@ -235,7 +235,7 @@ UNION ALL SELECT 'avaliacoes', COUNT(*) FROM avaliacoes;
 "
 ```
 
-Ou no **DBeaver** — ver [guia PostgreSQL](./postgres.md).
+Ou no **DBeaver** — ver [guia PostgreSQL](../infra/postgres.md).
 
 ---
 
@@ -286,14 +286,17 @@ print(fake.date_time_between(start_date="-3y", end_date="now"))
 
 ---
 
-## Carga incremental (futuro)
+## Carga incremental
 
-O trabalho pede demo inserindo pedidos novos após a carga full. O seed atual já simula **updates** em clientes; um script `seed_incremental.py` (issue futura) pode inserir dezenas de pedidos extras para subir KPIs no dashboard.
+O seed simula **updates** em clientes e endereços para demonstrar SCD2 na Gold. A carga incremental do pipeline está implementada nas DAGs:
+
+- `sparkeats_pipeline_full` — carga completa (executar primeiro)
+- `sparkeats_pipeline_incremental` — novos registros nas tabelas fato
 
 ---
 
 ## Ver também
 
-- [Guia UV](./uv.md) — `uv run python scripts/seed_database.py`
-- [Guia PostgreSQL](./postgres.md) — DDL, DBeaver, modelo
-- [Guia Docker](./docker.md) — Postgres no container
+- [Instalação](./instalacao.md) — `uv run python scripts/seed_database.py`
+- [PostgreSQL](../infra/postgres.md) — DDL, DBeaver, modelo
+- [Docker](../infra/docker.md) — Postgres no container

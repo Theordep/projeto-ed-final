@@ -11,7 +11,15 @@ Ferramenta de orquestração responsável por agendar e executar todas as etapas
 ## Subir o serviço
 
 ```bash
-docker compose -f docker/docker-compose.yml up -d airflow
+docker compose -f docker/docker-compose.yml up -d
+```
+
+O `airflow-init` roda automaticamente na primeira subida (migração do banco e criação do usuário `admin`). Os serviços `airflow-webserver` e `airflow-scheduler` iniciam após a inicialização.
+
+Para subir apenas o Airflow (com dependências):
+
+```bash
+docker compose -f docker/docker-compose.yml up -d airflow-webserver airflow-scheduler
 ```
 
 ## DAGs do pipeline

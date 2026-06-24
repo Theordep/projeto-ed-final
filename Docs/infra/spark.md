@@ -2,38 +2,38 @@
 
 ## Versão
 
-Apache Spark **3.5.1** — imagem `bitnami/spark:3.5.1`.
+Apache Spark **3.5.1** — imagem oficial `apache/spark:3.5.1`.
 
-## Status
+## Cluster standalone
 
-- Cluster Apache Spark configurado em `docker/docker-compose.yml`
-- Serviços:
-  - `spark-master` (Spark Master)
-  - `spark-worker` (Spark Worker)
+O `docker-compose.yml` inclui um cluster Spark standalone para monitoramento e uso futuro:
 
-## Como iniciar
+| Serviço | Função |
+|---------|--------|
+| `spark-master` | Coordenador (UI em http://localhost:8080) |
+| `spark-worker` | Executor (UI em http://localhost:8081) |
 
 ```bash
 docker compose -f docker/docker-compose.yml up -d spark-master spark-worker
 ```
+
+- Spark Master URL: `spark://spark-master:7077`
+
+## Como o pipeline executa Spark
+
+As DAGs do Airflow **não** submetem jobs via `spark-submit` ao cluster. O processamento roda com **PySpark em modo `local[*]`** dentro do container Airflow:
+
+- `SPARK_MASTER=local[*]` (variável no compose)
+- JARs do Delta Lake em `/opt/delta-jars` (imagem customizada)
+- Dados gravados em `DATA_ROOT` (`/data/sparkeats` no container) e sincronizados com o MinIO
+
+Código: `src/sparkeats/spark_session.py`.
 
 ## Verificar serviços
 
 ```bash
 docker compose -f docker/docker-compose.yml ps
 ```
-
-## Endpoints úteis
-
-- Spark Master UI: `http://localhost:8080`
-- Spark Worker UI: `http://localhost:8081`
-- Spark Master URL: `spark://spark-master:7077`
-
-## Observações
-
-- O compose atual inclui MinIO e o cluster Spark standalone.
-- Os jobs Spark são submetidos pelas DAGs do Airflow via `spark-submit`.
-- Dependências Delta Lake e conectores S3/MinIO são carregados automaticamente via JARs configurados no `docker-compose.yml`.
 
 ## Referências
 

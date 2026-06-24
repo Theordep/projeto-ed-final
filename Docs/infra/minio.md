@@ -4,8 +4,6 @@ O **MinIO** é o armazenamento de objetos do projeto **SparkEats**. Ele simula u
 
 Issue: [#3](https://github.com/Theordep/projeto-ed-final/issues/3)
 
-Documentação técnica: [Docs/infra/minio.md](../infra/minio.md)
-
 ---
 
 ## O que é MinIO no nosso contexto?
@@ -28,7 +26,7 @@ PostgreSQL (origem)
      gold          ← Delta Lake (modelo dimensional)
 ```
 
-Cada camada é um **bucket** no MinIO. O pipeline (issues futuras) lê e grava arquivos nesses buckets.
+Cada camada é um **bucket** no MinIO. O pipeline lê e grava arquivos nesses buckets via sync a partir do `DATA_ROOT` local.
 
 ---
 
@@ -117,7 +115,7 @@ bash scripts/create_minio_buckets.sh
 3. Menu **Object Browser**
 4. Clique em um bucket (`landing-zone`, `bronze`, etc.)
 
-Por enquanto os buckets estão vazios — o pipeline da issue #16 vai popular na landing e nas camadas seguintes.
+Por enquanto os buckets podem estar vazios até a primeira execução do pipeline — dispare `sparkeats_pipeline_full` no Airflow ou rode `scripts/run_pipeline.py`.
 
 ---
 
@@ -178,28 +176,25 @@ dcompose down -v
 
 ---
 
-## Como o pipeline vai usar (visão futura)
+## Como o pipeline usa o MinIO
 
-Variáveis já preparadas no ambiente:
+Variáveis no ambiente:
 
 ```bash
 echo $MINIO_ENDPOINT    # http://localhost:9090
 ```
 
-Conexão típica (PySpark / boto3 / cliente S3):
-
-- **Endpoint:** `http://localhost:9090`
-- **Access key:** `minioadmin`
-- **Secret key:** `minioadmin`
-- **Path style:** necessário em muitos clientes S3 para MinIO local
-
-Exemplo conceitual de caminho de objeto:
+O pipeline grava primeiro no disco local (`DATA_ROOT`) e espelha no MinIO via `sync_to_minio` (`src/sparkeats/storage.py`):
 
 ```text
-s3a://landing-zone/sparkeats/pedidos/2025-06-10/pedidos.csv
+{DATA_ROOT}/landing/postgres/pedidos/2025/06/24/143022/pedidos.csv
+  →  s3://landing-zone/postgres/pedidos/2025/06/24/143022/pedidos.csv
 ```
 
-(estrutura exata virá na issue do pipeline.)
+| Ambiente | `DATA_ROOT` |
+|----------|-------------|
+| WSL (`wsl-env.sh`) | `/tmp/sparkeats-data` |
+| Airflow (Docker) | `/data/sparkeats` |
 
 ---
 
@@ -258,4 +253,4 @@ dcompose up -d minio
 ## Ver também
 
 - [Guia Docker](./docker.md) — compose, volumes, `dcompose`
-- [Guia PostgreSQL](./postgres.md) — origem dos dados que irão para a landing
+- [PostgreSQL](postgres.md) — origem dos dados que irão para a landing

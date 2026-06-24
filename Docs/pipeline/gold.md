@@ -6,8 +6,25 @@ A camada **Gold** consolida os dados da Silver em um **Star Schema** pronto para
 
 | Item | Valor |
 |------|--------|
-| Entrada | Delta Silver (`/tmp/sparkeats-data/silver/postgres/`) |
-| Saída | Delta Gold (`/tmp/sparkeats-data/gold/`) + sync MinIO bucket `gold` |
+| Entrada | Delta Silver (`{DATA_ROOT}/silver/postgres/<tabela>/`) |
+| Saída | Delta Gold (`{DATA_ROOT}/gold/`) + sync MinIO bucket `gold` |
+| Export | PostgreSQL schema `analytics` (tarefa `export_to_pg`) |
+
+`DATA_ROOT` depende do ambiente:
+
+| Ambiente | `DATA_ROOT` |
+|----------|-------------|
+| WSL local (`wsl-env.sh`) | `/tmp/sparkeats-data` |
+| Container Airflow | `/data/sparkeats` |
+
+## Tarefas Airflow: `gold_full` / `gold_incremental` + `export_to_pg`
+
+| Modo | Tarefa Gold | Comportamento |
+|------|-------------|---------------|
+| Full | `gold_full` | Reconstrói dimensões e fato (`overwrite`) |
+| Incremental | `gold_incremental` | Append em `fato_pedidos` via checkpoint |
+
+Após o gold, `export_to_pg` espelha as tabelas no schema `analytics` para consumo pelo Metabase.
 
 ## Tabelas geradas
 
@@ -42,21 +59,26 @@ A `fato_pedidos` suporta carga incremental via `checkpoint_fato_pedidos`:
 
 ## Execução
 
-```bash
-source scripts/wsl-env.sh
+=== "Airflow UI"
+    - `sparkeats_pipeline_full` — primeira carga ou reprocessamento completo
+    - `sparkeats_pipeline_incremental` — novos pedidos (requer full prévio)
 
-# Carga completa (recomendado na 1ª vez)
-uv run python scripts/run_pipeline.py --step gold
+=== "CLI local (WSL)"
+    ```bash
+    source scripts/wsl-env.sh
 
-# Pipeline completo
-uv run python scripts/run_pipeline.py
+    # Carga completa (recomendado na 1ª vez)
+    uv run python scripts/run_pipeline.py --step gold
 
-# Incremental (landing + gold)
-uv run python scripts/run_pipeline.py --incremental
+    # Pipeline completo
+    uv run python scripts/run_pipeline.py
 
-# Só gold incremental (Silver já atualizada)
-uv run python scripts/run_pipeline.py --step gold --incremental
-```
+    # Incremental (landing + gold)
+    uv run python scripts/run_pipeline.py --incremental
+
+    # Só gold incremental (Silver já atualizada)
+    uv run python scripts/run_pipeline.py --step gold --incremental
+    ```
 
 ## Validação
 

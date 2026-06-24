@@ -4,7 +4,9 @@ O banco de dados de origem é um PostgreSQL 16 que simula o sistema transacional
 
 ## Diagrama
 
-![Modelo de Origem SparkEats](../assets/modelo-dimensional.png)
+O modelo dimensional (camada Gold) está documentado em [Modelo Dimensional](dimensional.md).
+
+O modelo relacional de origem possui **12 tabelas** — detalhes nas seções abaixo e no DDL em `sql/ddl_origem_postgresql.sql`.
 
 ## Tabelas
 
@@ -47,6 +49,15 @@ O banco de dados de origem é um PostgreSQL 16 que simula o sistema transacional
     | `taxa_comissao` | DECIMAL(5,2) | Comissão da plataforma |
     | `status` | VARCHAR(20) | ATIVO / INATIVO / SUSPENSO |
 
+=== "cardapio"
+    | Coluna | Tipo | Descrição |
+    |--------|------|-----------|
+    | `id_item` | SERIAL PK | Identificador |
+    | `id_restaurante` | INT FK | Restaurante |
+    | `nome_item` | VARCHAR(120) | Nome do item |
+    | `preco` | DECIMAL(10,2) | Preço unitário |
+    | `disponivel` | BOOLEAN | Item ativo no cardápio |
+
 === "clientes"
     | Coluna | Tipo | Descrição |
     |--------|------|-----------|
@@ -55,6 +66,18 @@ O banco de dados de origem é um PostgreSQL 16 que simula o sistema transacional
     | `email` | VARCHAR(180) | E-mail (único por ativo) |
     | `cpf` | VARCHAR(14) | CPF (único) |
     | `status_ativo` | BOOLEAN | Ativo/inativo |
+
+=== "enderecos_cliente"
+    | Coluna | Tipo | Descrição |
+    |--------|------|-----------|
+    | `id_endereco` | SERIAL PK | Identificador |
+    | `id_cliente` | INT FK | Cliente |
+    | `logradouro` | VARCHAR(200) | Rua/avenida |
+    | `bairro` | VARCHAR(100) | Bairro |
+    | `cidade` | VARCHAR(100) | Cidade |
+    | `estado` | CHAR(2) | UF |
+    | `principal` | BOOLEAN | Endereço principal |
+    | `status_ativo` | BOOLEAN | Versão ativa (SCD) |
 
 === "entregadores"
     | Coluna | Tipo | Descrição |
@@ -77,6 +100,16 @@ O banco de dados de origem é um PostgreSQL 16 que simula o sistema transacional
     | `status_pedido` | VARCHAR(20) | ENTREGUE / CANCELADO / EM_TRANSITO / PREPARANDO |
     | `valor_total` | DECIMAL(10,2) | Valor final |
     | `tempo_entrega_min` | INT | Tempo em minutos |
+
+=== "itens_pedido"
+    | Coluna | Tipo | Descrição |
+    |--------|------|-----------|
+    | `id_item_pedido` | BIGSERIAL PK | Identificador |
+    | `id_pedido` | BIGINT FK | Pedido |
+    | `id_item` | INT FK | Item do cardápio |
+    | `quantidade` | INT | Quantidade |
+    | `preco_unitario` | DECIMAL(10,2) | Preço na compra |
+    | `subtotal` | DECIMAL(10,2) | Quantidade × preço |
 
 === "pagamentos"
     | Coluna | Tipo | Descrição |

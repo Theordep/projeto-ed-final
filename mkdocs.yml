@@ -96,6 +96,7 @@ nav:
   - Início Rápido:
     - Pré-requisitos: quickstart/prerequisitos.md
     - Instalação: quickstart/instalacao.md
+    - Guia Faker: quickstart/faker.md
 
   - Infraestrutura:
     - Visão geral: infra/index.md

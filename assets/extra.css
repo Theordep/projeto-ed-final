@@ -1,0 +1,207 @@
+/* ============================================================
+   SparkEats — Laravel-inspired theme
+   ============================================================ */
+
+/* --- BRAND COLORS --- */
+:root {
+  --laravel-red: #F53003;
+  --laravel-red-dark: #c92500;
+}
+
+/* --- HEADER --- */
+.md-header {
+  box-shadow: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-md-color-scheme="default"] .md-header {
+  color: #111;
+}
+
+/* Logo */
+.md-header__button.md-logo img {
+  height: 40px;
+  width: auto;
+}
+
+/* --- TABS (features do topo) --- */
+[data-md-color-scheme="default"] .md-tabs {
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+[data-md-color-scheme="default"] .md-tabs__link {
+  color: #555;
+  opacity: 1;
+}
+
+[data-md-color-scheme="default"] .md-tabs__link:hover,
+[data-md-color-scheme="default"] .md-tabs__link--active {
+  color: var(--laravel-red);
+}
+
+[data-md-color-scheme="default"] .md-tabs__indicator {
+  background-color: var(--laravel-red);
+}
+
+[data-md-color-scheme="slate"] .md-tabs__link--active,
+[data-md-color-scheme="slate"] .md-tabs__link:hover {
+  color: #ff6644;
+}
+
+[data-md-color-scheme="slate"] .md-tabs__indicator {
+  background-color: var(--laravel-red);
+}
+
+/* --- CORES GLOBAIS DE LINK E ACCENT --- */
+[data-md-color-scheme="default"] {
+  --md-typeset-a-color: var(--laravel-red);
+  --md-accent-fg-color: var(--laravel-red);
+}
+
+[data-md-color-scheme="slate"] {
+  --md-typeset-a-color: #ff6644;
+  --md-accent-fg-color: var(--laravel-red);
+}
+
+/* --- SIDEBAR / NAVEGAÇÃO LATERAL --- */
+/* Indicador de borda esquerda no item ativo (estilo Laravel) */
+.md-nav__item {
+  position: relative;
+}
+
+.md-nav__link--active {
+  color: var(--laravel-red) !important;
+  font-weight: 500;
+}
+
+[data-md-color-scheme="default"] .md-nav__link--active {
+  box-shadow: inset 3px 0 0 var(--laravel-red);
+  padding-left: calc(var(--md-nav-item-padding-x, 0.6rem) + 6px);
+}
+
+[data-md-color-scheme="slate"] .md-nav__link--active {
+  color: #ff6644 !important;
+  box-shadow: inset 3px 0 0 #ff6644;
+  padding-left: calc(var(--md-nav-item-padding-x, 0.6rem) + 6px);
+}
+
+.md-nav__link:hover {
+  color: var(--laravel-red);
+}
+
+[data-md-color-scheme="slate"] .md-nav__link:hover {
+  color: #ff6644;
+}
+
+/* --- TOC (On this page) --- */
+.md-nav--secondary .md-nav__link--active {
+  color: var(--laravel-red) !important;
+  border-left: 3px solid var(--laravel-red);
+  padding-left: 0.4rem;
+}
+
+[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link--active {
+  color: #ff6644 !important;
+  border-left-color: #ff6644;
+}
+
+.md-nav--secondary .md-nav__link:hover {
+  color: var(--laravel-red);
+}
+
+/* --- CODE BLOCKS --- */
+/* Bordas arredondadas estilo Laravel */
+.highlight {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.md-typeset pre {
+  border-radius: 8px;
+}
+
+/* Botão de copiar */
+.md-clipboard {
+  color: rgba(255, 255, 255, 0.45);
+  transition: color 0.2s;
+}
+
+.md-clipboard:hover {
+  color: #ffffff;
+}
+
+/* --- TIPOGRAFIA --- */
+.md-typeset h1 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.md-typeset h2 {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  padding-bottom: 0.4em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+[data-md-color-scheme="slate"] .md-typeset h2 {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.md-typeset h3 {
+  font-weight: 600;
+}
+
+.md-typeset p {
+  line-height: 1.75;
+}
+
+/* --- ADMONITIONS / CALLOUTS --- */
+/* Estilo mais limpo, sem sombra, apenas borda esquerda colorida */
+.md-typeset .admonition,
+.md-typeset details {
+  border-width: 0;
+  border-left-width: 4px;
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+[data-md-color-scheme="default"] .md-typeset .admonition,
+[data-md-color-scheme="default"] .md-typeset details {
+  background: #f9f9f8;
+}
+
+/* --- SEARCH --- */
+[data-md-color-scheme="default"] .md-search__form {
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 6px;
+  background: #f5f5f4;
+  box-shadow: none;
+}
+
+[data-md-color-scheme="default"] .md-search__input:focus {
+  border-color: var(--laravel-red);
+}
+
+/* --- FOOTER --- */
+[data-md-color-scheme="default"] .md-footer {
+  background: #f8f8f7;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-md-color-scheme="default"] .md-footer-meta {
+  background: #f0f0ef;
+}
+
+/* --- TABELAS --- */
+.md-typeset table:not([class]) th {
+  background: var(--laravel-red);
+  color: #ffffff;
+}
+
+/* --- BACK TO TOP BUTTON --- */
+.md-top {
+  background-color: var(--laravel-red);
+  color: #ffffff;
+}

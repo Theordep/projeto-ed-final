@@ -1,12 +1,4 @@
-# SparkEats
-
-> Pipeline analítico de dados para uma plataforma de delivery — da origem ao dashboard.
-
-![Arquitetura SparkEats](assets/arquitetura.png)
-
----
-
-## O que é o SparkEats?
+# O que é o SparkEats?
 
 O **SparkEats** é um projeto acadêmico que simula o pipeline de dados analítico de uma plataforma de delivery (no estilo iFood/Uber Eats). O objetivo é construir toda a jornada do dado: desde a geração sintética no banco de origem até a disponibilização em um modelo dimensional para consumo em dashboard.
 
